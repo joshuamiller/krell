@@ -225,6 +225,10 @@
   [cfg value]
   (assoc-in cfg [:repl-env-options :index-js] value))
 
+(defn custom-index-out-opt
+  [cfg value]
+  (assoc-in cfg [:repl-env-options :index-js-out] value))
+
 (defn watch-dirs-opt
   [cfg value]
   (assoc-in cfg [:repl-env-options :watch-dirs]
@@ -310,7 +314,12 @@
                       {:group ::cli/main
                        :fn    custom-index-opt
                        :arg   "string"
-                       :doc   (str "Custom index.js resource on the classpath, i.e. Expo helpers etc.")}}
+                       :doc   (str "Custom index.js resource on the classpath, i.e. Expo helpers etc.")}
+                      ["-I" "--index-js-out"]
+                      {:group ::cli/main
+                       :fn    custom-index-out-opt
+                       :arg   "string"
+                       :doc   (str "Destination for index.js file")}}
                      :main
                      {["-s" "--serve"]
                       {:fn (fn [cfg opt]
